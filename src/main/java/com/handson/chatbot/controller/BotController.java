@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/bot")
 public class BotController {
 
     @Autowired
-    ImdbService amazonService;
+    ImdbService imdbService; // Ensure this matches the service name
 
-    @RequestMapping(value = "/amazon", method = RequestMethod.GET)
-    public ResponseEntity<?> getProduct(@RequestParam String keyword)
-    {
-        return new ResponseEntity<>(amazonService.searchMovie(keyword), HttpStatus.OK);
+    @RequestMapping(value = "/imdb", method = RequestMethod.GET)
+    public ResponseEntity<?> getMovie(@RequestParam String keyword) throws IOException {
+        // Use the instance variable to call the non-static method
+        return new ResponseEntity<>(imdbService.searchMovie(keyword), HttpStatus.OK);
     }
 }
