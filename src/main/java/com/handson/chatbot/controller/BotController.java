@@ -1,6 +1,7 @@
 package com.handson.chatbot.controller;
 
 import com.handson.chatbot.service.ImdbService;
+import com.handson.chatbot.service.TranslationService;
 import com.handson.chatbot.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ public class BotController {
     @Autowired
     WeatherService weatherService;
 
+    @Autowired
+    TranslationService translationService;
     @RequestMapping(value = "/imdb", method = RequestMethod.GET)
     public ResponseEntity<?> getMovie(@RequestParam String keyword) throws IOException {
         // Use the instance variable to call the non-static method
@@ -32,6 +35,13 @@ public class BotController {
         return new ResponseEntity<>(weatherService.getWeatherForLocation(keyword), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/translate", method = RequestMethod.GET)
+    public ResponseEntity<?> getTranslate(@RequestParam String keyword) throws IOException {
+        // Use the instance variable to call the non-static method
+        return new ResponseEntity<>(translationService.Translate(keyword), HttpStatus.OK);
+    }
+
+
     @RequestMapping(value = "", method = { RequestMethod.POST})
     public ResponseEntity<?> getBotResponse(@RequestBody BotQuery query) throws IOException {
         HashMap<String, String> params = query.getQueryResult().getParameters();
@@ -40,6 +50,9 @@ public class BotController {
             res = weatherService.getWeatherForLocation(params.get("city"));
         } else if (params.containsKey("movie")) {
             res = imdbService.searchMovie(params.get("movie"));
+        } else if (params.containsKey("word")) {
+            res = translationService.Translate(params.get("word"));
+
         }
         return new ResponseEntity<>(BotResponse.of(res), HttpStatus.OK);
     }
