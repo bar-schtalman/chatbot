@@ -18,7 +18,7 @@ A Spring Boot backend project for a chatbot that supports small talk and provide
   [Swagger UI](https://bar-chatbot.runmydocker-app.com/swagger-ui.html#!/bot-controller/)
   
 - **Chat with the Bot**: Use the Dialogflow web demo to interact with the bot. User input from the web demo is mapped to API calls, returning the desired responses.  
-  [Dialogflow Web Demo]([https://bot.dialogflow.com/19c25156-338d-4f3b-8e7b-4b435c01e6ba](https://console.dialogflow.com/api-client/demo/embedded/19c25156-338d-4f3b-8e7b-4b435c01e6ba))
+  [Dialogflow Web Demo](https://console.dialogflow.com/api-client/demo/embedded/19c25156-338d-4f3b-8e7b-4b435c01e6ba)
 
 ## Technologies Used
 
